@@ -6,7 +6,7 @@ import me.learning.domain.model.Employee;
 
 public interface EmployeeService {
 
-  public List<Employee> getAll();
-  public void create(String name, String dept);
+  public List<Employee> getAllEmployees();
+  public void createEmployee(String name, String dept);
   
 }
