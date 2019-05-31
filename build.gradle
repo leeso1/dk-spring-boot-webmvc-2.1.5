@@ -7,7 +7,7 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 bootJar {
-  baseName = 'dk-spring-boot-webmvc-2.1.5'
+  baseName = 'learning-spring-webmvc'
   version = '0.0.1'
 }
 
