@@ -4,16 +4,22 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity(name = "EMPLOYEE")
+@Entity
+@Table(name = "EMPLOYEE")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @ToString
-@Builder
 @EqualsAndHashCode(callSuper=false)
 public class Employee extends BaseEntity {
 
@@ -23,7 +29,7 @@ public class Employee extends BaseEntity {
   @Id
   @GeneratedValue
   @Column(name = "EMPLOYEE_ID", nullable = false, updatable = false)
-  private final Long id;
+  private Long id;
   
   /**
    * Employee Name
@@ -36,4 +42,5 @@ public class Employee extends BaseEntity {
    */
   @Column(name = "EMPLOYEE_DEPT", length = 100)
   private String department;
+
 }

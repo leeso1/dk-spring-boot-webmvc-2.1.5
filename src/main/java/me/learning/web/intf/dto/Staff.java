@@ -1,5 +1,7 @@
 package me.learning.web.intf.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Builder;
 import lombok.Data;
 import me.learning.domain.model.Employee;
@@ -8,8 +10,13 @@ import me.learning.domain.model.Employee;
 @Builder
 public class Staff {
 
+  @JsonProperty("id")
   private Long staffId;
+  
+  @JsonProperty("name")
   private String staffName;
+  
+  @JsonProperty("department")
   private String staffDepartment;
   
   public static Staff from(Employee employee) {

@@ -8,5 +8,6 @@ public interface EmployeeService {
 
   public List<Employee> getAllEmployees();
   public void createEmployee(String name, String dept);
+  public Employee getStaffByName(String name);
   
 }
