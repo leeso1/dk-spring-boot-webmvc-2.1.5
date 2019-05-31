@@ -3,4 +3,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'dk-spring-boot-webmvc-2.1.5'
+rootProject.name = 'learning-spring-webmvc'
