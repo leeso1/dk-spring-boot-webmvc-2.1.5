@@ -1,13 +1,16 @@
 package me.learning.web.intf;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,12 +32,22 @@ public class EmployeeController {
   @Autowired
   EmployeeService employeeService;
   
-  @GetMapping(value = "/staffs")
-  public List<Staff> getAllStaffs() {
-    LOG.info("[IF-001.STAFF 전체 조회]");
-    return employeeService.getAllEmployees().stream()
+  @GetMapping(value = "/staffs", params = {"page", "size"})
+  public Page<Staff> getAllStaffs(
+      @RequestParam(name = "page", defaultValue="0") @Min(0) int page,
+      @RequestParam(name = "size", defaultValue = "10") @Min(1) @Max(100) int size) {
+    LOG.info("[IF-001.STAFF 전체 조회] params -> page={}, size={}", page, size);
+    Page<Employee> employees = employeeService.getAllEmployees(page, size);
+    return new PageImpl<>(
+        employees.getContent().stream()
         .map(Staff::from)
-        .collect(Collectors.toList());
+        .collect(Collectors.toList()), 
+        employees.getPageable(), employees.getTotalElements());
+    }
+  
+  @GetMapping(value = "/staffs", params = {"offset", "limit"})
+  public Page<Staff> getStaffPagenated() {
+    return null;
   }
   
   @PostMapping(value = "/staffs")

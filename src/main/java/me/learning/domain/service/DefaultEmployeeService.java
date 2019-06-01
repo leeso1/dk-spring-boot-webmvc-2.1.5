@@ -1,16 +1,15 @@
 package me.learning.domain.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
-import com.google.common.collect.Lists;
 
 import me.learning.domain.model.Employee;
 import me.learning.domain.model.EmployeeRepository;
@@ -25,8 +24,11 @@ public class DefaultEmployeeService implements EmployeeService {
   private EmployeeRepository employeeRepository;
   
   @Transactional(readOnly=true)
-  public List<Employee> getAllEmployees() {
-    return Lists.newArrayList(employeeRepository.findAll());
+  public Page<Employee> getAllEmployees(int page, int size) {
+    
+    PageRequest req = PageRequest.of(page, size);
+    Page<Employee> result = employeeRepository.findAll(req);
+    return result;
   }
  
   public void createEmployee(String name, String dept) {

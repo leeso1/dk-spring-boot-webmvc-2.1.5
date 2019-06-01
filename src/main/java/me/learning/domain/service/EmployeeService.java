@@ -1,12 +1,12 @@
 package me.learning.domain.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import me.learning.domain.model.Employee;
 
 public interface EmployeeService {
 
-  public List<Employee> getAllEmployees();
+  public Page<Employee> getAllEmployees(int page, int size);
   public void createEmployee(String name, String dept);
   public Employee getStaffByName(String name);
   
