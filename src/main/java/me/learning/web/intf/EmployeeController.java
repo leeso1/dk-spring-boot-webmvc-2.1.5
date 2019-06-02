@@ -61,8 +61,8 @@ public class EmployeeController {
   static class EmployeeSorts {
     public static final String NAME_ASC = "name_asc";
     public static final String NAME_DSC = "name_dsc";
-    
-   /**
+
+    /**
      * Employee.name ascending sort
      */
     private static final Sort BY_NAME_ASC = Sort.by(Sort.Direction.ASC, "name");

@@ -9,6 +9,8 @@ import javax.persistence.PreUpdate;
 
 import lombok.Getter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @MappedSuperclass
 @Getter
@@ -19,24 +21,14 @@ public abstract class BaseEntity {
    * updated time
    */
   @Column(name = "UPDATED", nullable = false)
+  @UpdateTimestamp
   private LocalDateTime updated;
   
   /**
    * created time
    */
   @Column(name = "CREATED", nullable = false, updatable = false)
+  @CreationTimestamp
   private LocalDateTime created;
-  
-  @PrePersist
-  public void prePersist() {
-    LocalDateTime now = LocalDateTime.now().withNano(0);
-    this.updated = now;
-    this.created = now;
-  }
-  
-  @PreUpdate
-  public void preUpdate() {
-    this.updated = LocalDateTime.now().withNano(0);
-  }
 
 }
