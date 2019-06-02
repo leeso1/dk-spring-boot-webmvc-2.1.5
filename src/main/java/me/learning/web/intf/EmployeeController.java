@@ -36,7 +36,7 @@ public class EmployeeController {
   public Page<Staff> getAllStaffs(
       @RequestParam(name = "page", defaultValue="0") @Min(0) int page,
       @RequestParam(name = "size", defaultValue = "10") @Min(1) @Max(100) int size) {
-    LOG.info("[IF-001.STAFF 전체 조회] params -> page={}, size={}", page, size);
+    LOG.info("[IF-001.STAFF 조회] params -> page={}, size={}", page, size);
     Page<Employee> employees = employeeService.getAllEmployees(page, size);
     return new PageImpl<>(
         employees.getContent().stream()
@@ -46,17 +46,20 @@ public class EmployeeController {
     }
   
   @GetMapping(value = "/staffs", params = {"offset", "limit"})
-  public Page<Staff> getStaffPagenated() {
-    return null;
+  public Page<Staff> getStaffPagenated(
+      @RequestParam(name = "offset", defaultValue="0") @Min(0) int offset,
+      @RequestParam(name = "limit", defaultValue = "10") @Min(1) @Max(100) int limit) {
+    LOG.info("[IF-002.STAFF 조회] params -> offset={}, size={}", offset, limit);
+    return Page.empty();
   }
   
   @PostMapping(value = "/staffs")
   public void createStaff(
       @RequestParam(name = "name") @NotBlank String staffName,
       @RequestParam(name = "department") String staffDepartment ) {
-    LOG.info("[IF-002.STAFF 생성] params -> name={}, department={}", staffName, staffDepartment);
+    LOG.info("[IF-003.STAFF 생성] params -> name={}, department={}", staffName, staffDepartment);
     employeeService.createEmployee(staffName, staffDepartment);
-    LOG.info("[IF-002.STAFF 생성] OK");
+    LOG.info("[IF-003.STAFF 생성] OK");
   }
   
   @GetMapping(value = "/staffs/find")
