@@ -8,7 +8,7 @@ import me.learning.domain.model.Employee;
 
 @Data
 @Builder
-public class Staff {
+public final class Staff {
 
   @JsonProperty("id")
   private Long staffId;
