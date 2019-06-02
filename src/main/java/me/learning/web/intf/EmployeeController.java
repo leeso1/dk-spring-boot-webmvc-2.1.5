@@ -62,7 +62,7 @@ public class EmployeeController {
     LOG.info("[IF-003.STAFF 생성] OK");
   }
   
-  @GetMapping(value = "/staffs/find")
+  @GetMapping(value = "/staffs/showByName")
   public Staff getStaffByName(
       @RequestParam(name = "name") @NotBlank String staffName) {
     LOG.info("[IF-003.STAFF 조회] params -> name={}", staffName);
