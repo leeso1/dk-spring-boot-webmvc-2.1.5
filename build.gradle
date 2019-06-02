@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.5.RELEASE'
 	id 'java'
 	id 'eclipse'
+	// id "at.comm_unity.gradle.plugins.jpamodelgen" version "1.1.4"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -9,6 +10,7 @@ apply plugin: 'io.spring.dependency-management'
 bootJar {
   baseName = 'learning-spring-webmvc'
   version = '0.0.1'
+  launchScript()
 }
 
 sourceCompatibility = '1.8'
@@ -21,7 +23,10 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
+	mavenLocal()
+  maven { url "https://plugins.gradle.org/m2/" }
+  mavenCentral()
+  jcenter()
 }
 
 dependencies {
@@ -29,8 +34,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.google.guava:guava:27.1-jre'
 	compileOnly 'org.projectlombok:lombok'
+	compileOnly 'org.hibernate:hibernate-jpamodelgen'
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.hibernate:hibernate-jpamodelgen'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

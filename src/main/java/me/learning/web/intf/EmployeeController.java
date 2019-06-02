@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,16 +38,16 @@ public class EmployeeController {
    * 
    * @param page - page index
    * @param size - item size
-   * @param sort - nm_desc, nm_asc(default)
+   * @param sort - nm_dsc, nm_asc(default)
    * @return Page<Staff>
    */
   @GetMapping(value = "/staffs", params = {"page", "size"})
   public PageResult<Staff> getAllStaffs(
       @RequestParam(name = "page", defaultValue="0") @Min(0) int page,
       @RequestParam(name = "size", defaultValue = "10") @Min(1) @Max(100) int size,
-      @RequestParam(name = "sort", defaultValue = "nm_asc") String sort) {
+      @RequestParam(name = "sort", required = false) String sort) {
     LOG.info("[IF-001.STAFF 조회] params -> page={}, size={}, sort={}", page, size, sort);
-    Page<Employee> employees = employeeService.getAllEmployees(page, size);
+    Page<Employee> employees = employeeService.getAllEmployees(page, size, EmployeeSorts.of(sort));
     LOG.info("[IF-001.STAFF 조회] OK. Returned elements={}", employees.getNumberOfElements());
     return PageResult.<Staff>builder()
         .total(employees.getTotalElements())
@@ -56,6 +57,32 @@ public class EmployeeController {
             .collect(Collectors.toList()))
         .build();
     }
+  
+  static class EmployeeSorts {
+    public static final String NAME_ASC = "name_asc";
+    public static final String NAME_DSC = "name_dsc";
+    
+   /**
+     * Employee.name ascending sort
+     */
+    private static final Sort BY_NAME_ASC = Sort.by(Sort.Direction.ASC, "name");
+    
+    /**
+     * Employee.name descending sort
+     */
+    private static final Sort BY_NAME_DSC = Sort.by(Sort.Direction.DESC, "name");
+    
+    public static final Sort of(String sort) {
+      if (NAME_ASC.equals(sort)) {
+        return BY_NAME_ASC;
+      }
+      else if (NAME_DSC.equals(sort)) {
+        return BY_NAME_DSC;
+      }
+      return BY_NAME_ASC;
+    }
+    
+  }
   
   /**
    * Offset, Limit을 이용한 Staff 조회

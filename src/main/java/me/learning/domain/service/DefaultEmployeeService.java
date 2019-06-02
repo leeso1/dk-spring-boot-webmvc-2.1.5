@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -24,9 +25,9 @@ public class DefaultEmployeeService implements EmployeeService {
   private EmployeeRepository employeeRepository;
   
   @Transactional(readOnly=true)
-  public Page<Employee> getAllEmployees(int page, int size) {
+  public Page<Employee> getAllEmployees(int page, int size, Sort sort) {
     
-    PageRequest req = PageRequest.of(page, size);
+    PageRequest req = PageRequest.of(page, size, sort);
     Page<Employee> result = employeeRepository.findAll(req);
     return result;
   }
@@ -49,6 +50,6 @@ public class DefaultEmployeeService implements EmployeeService {
   public Employee getStaffByName(String name) {
     Assert.notNull(name, "name must be not null");
     Optional<Employee> employee = employeeRepository.findByName(name);
-    return employee.orElseThrow(() -> new ResourceNotFoundException("Not Found"));
+    return employee.orElseThrow(() -> new ResourceNotFoundException("Not Found " + name));
   }
 }
