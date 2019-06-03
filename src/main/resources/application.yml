@@ -1,7 +1,7 @@
 # IDENTITY
 spring:
   application:
-    name: dk-spring-boot-webmvc
+    name: learning-spring-webmvc
   
   # JACSON  
   jackson:
