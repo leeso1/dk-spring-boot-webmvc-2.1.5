@@ -4,17 +4,11 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 
-import lombok.Getter;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @MappedSuperclass
-@Getter
-@ToString
 public abstract class BaseEntity {
   
   /**
@@ -30,5 +24,18 @@ public abstract class BaseEntity {
   @Column(name = "CREATED", nullable = false, updatable = false)
   @CreationTimestamp
   private LocalDateTime created;
+
+  public LocalDateTime getUpdated() {
+    return updated;
+  }
+
+  public LocalDateTime getCreated() {
+    return created;
+  }
+
+  @Override
+  public String toString() {
+    return "BaseEntity [updated=" + updated + ", created=" + created + "]";
+  }
 
 }
