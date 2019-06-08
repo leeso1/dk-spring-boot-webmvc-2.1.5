@@ -38,8 +38,8 @@ public class DefaultEmployeeService implements EmployeeService {
     // TODO 동명인이 있을 경우 유니크 에러를 발생하도록 수정 예정
     
     Employee employee = Employee.builder()
-        .name(name)
-        .department(dept)
+        .withName(name)
+        .withDepartment(dept)
         .build();
     employee = employeeRepository.save(employee);
     LOG.info("Created new employee with id({})", employee.getId());
