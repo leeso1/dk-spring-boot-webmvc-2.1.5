@@ -3,23 +3,20 @@ package me.learning.web.intf.support;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.google.common.collect.Maps;
 
+import lombok.extern.slf4j.Slf4j;
 import me.learning.domain.service.ResourceNotFoundException;
 
+@Slf4j
 @RestControllerAdvice
 public class ErrorResponseControllerAdvice {
-
-  private static final Logger LOG = LoggerFactory.getLogger(ErrorResponseControllerAdvice.class);
   
   @Autowired
   MessageSource messageSource;
@@ -36,8 +33,10 @@ public class ErrorResponseControllerAdvice {
         .message("from messageSources") // TODO message resolver 필요
         .build();
     
+    log.warn("error={}", error);
+    
     return ResponseEntity
-        .status(HttpStatus.BAD_REQUEST)
+        .status(code.getStatus())
         .body(Maps.immutableEntry("error", error));
   }
 
