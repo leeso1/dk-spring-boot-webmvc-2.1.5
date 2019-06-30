@@ -19,37 +19,37 @@ import me.learning.domain.model.EmployeeRepository;
 @Transactional
 public class DefaultEmployeeService implements EmployeeService {
 
-  private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
-  
-  @Autowired
-  private EmployeeRepository employeeRepository;
-  
-  @Transactional(readOnly=true)
-  public Page<Employee> getAllEmployees(int page, int size, Sort sort) {
-    
-    PageRequest req = PageRequest.of(page, size, sort);
-    Page<Employee> result = employeeRepository.findAll(req);
-    return result;
-  }
- 
-  public void createEmployee(String name, String dept) {
-    Assert.notNull(name, "name must be not null");
-    
-    // TODO 동명인이 있을 경우 유니크 에러를 발생하도록 수정 예정
-    
-    Employee employee = Employee.builder()
-        .withName(name)
-        .withDepartment(dept)
-        .build();
-    employee = employeeRepository.save(employee);
-    LOG.info("Created new employee with id({})", employee.getId());
-  }
+    private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
 
-  @Override
-  @Transactional(readOnly=true)
-  public Employee getStaffByName(String name) {
-    Assert.notNull(name, "name must be not null");
-    Optional<Employee> employee = employeeRepository.findByName(name);
-    return employee.orElseThrow(() -> new ResourceNotFoundException("Not Found " + name));
-  }
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Transactional(readOnly = true)
+    public Page<Employee> getAllEmployees(int page, int size, Sort sort) {
+
+        PageRequest req = PageRequest.of(page, size, sort);
+        Page<Employee> result = employeeRepository.findAll(req);
+        return result;
+    }
+
+    public void createEmployee(String name, String dept) {
+        Assert.notNull(name, "name must be not null");
+
+        // TODO 동명인이 있을 경우 유니크 에러를 발생하도록 수정 예정
+
+        Employee employee = Employee.builder()
+                .withName(name)
+                .withDepartment(dept)
+                .build();
+        employee = employeeRepository.save(employee);
+        LOG.info("Created new employee with id({})", employee.getId());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Employee getStaffByName(String name) {
+        Assert.notNull(name, "name must be not null");
+        Optional<Employee> employee = employeeRepository.findByName(name);
+        return employee.orElseThrow(() -> new ResourceNotFoundException("Not Found " + name));
+    }
 }

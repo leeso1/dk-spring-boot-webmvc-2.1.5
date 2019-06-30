@@ -10,32 +10,32 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @MappedSuperclass
 public abstract class BaseEntity {
-  
-  /**
-   * updated time
-   */
-  @Column(name = "UPDATED", nullable = false)
-  @UpdateTimestamp
-  private LocalDateTime updated;
-  
-  /**
-   * created time
-   */
-  @Column(name = "CREATED", nullable = false, updatable = false)
-  @CreationTimestamp
-  private LocalDateTime created;
 
-  public LocalDateTime getUpdated() {
-    return updated;
-  }
+    /**
+     * updated time
+     */
+    @Column(name = "UPDATED", nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updated;
 
-  public LocalDateTime getCreated() {
-    return created;
-  }
+    /**
+     * created time
+     */
+    @Column(name = "CREATED", nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime created;
 
-  @Override
-  public String toString() {
-    return "BaseEntity [updated=" + updated + ", created=" + created + "]";
-  }
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseEntity [updated=" + updated + ", created=" + created + "]";
+    }
 
 }

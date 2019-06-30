@@ -7,8 +7,10 @@ import me.learning.domain.model.Employee;
 
 public interface EmployeeService {
 
-  public Page<Employee> getAllEmployees(int page, int size, Sort sort);
-  public void createEmployee(String name, String dept);
-  public Employee getStaffByName(String name);
-  
+    public Page<Employee> getAllEmployees(int page, int size, Sort sort);
+
+    public void createEmployee(String name, String dept);
+
+    public Employee getStaffByName(String name);
+
 }

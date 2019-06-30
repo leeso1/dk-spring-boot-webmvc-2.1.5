@@ -12,11 +12,11 @@ import lombok.Data;
 @Builder
 public final class PageResult<T> {
 
-  private final long total;
-  private final List<T> items;
-  
-  public static <T> PageResult<T> empty() {
-    return new PageResult<>(0L, ImmutableList.of());
-  }
-  
+    private final long total;
+    private final List<T> items;
+
+    public static <T> PageResult<T> empty() {
+        return new PageResult<>(0L, ImmutableList.of());
+    }
+
 }

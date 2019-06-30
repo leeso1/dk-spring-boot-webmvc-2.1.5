@@ -2,14 +2,14 @@
 spring:
   application:
     name: learning-spring-webmvc
-  
+
   # JACSON  
   jackson:
     default-property-inclusion: non-null
     serialization:
       indent-output: true
       write-dates-as-timestamps: false
-      
+
   # H2 Web Console (H2ConsoleProperties)
   h2:
     console:
@@ -17,15 +17,15 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true
-        
+
   # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
   datasource:
     continue-on-error: true
     url: jdbc:h2:~/webmvc
     username: sa
-    password: 
+    password:
     driver-class-name: org.h2.Driver
-      
+
   # JPA (JpaBaseConfiguration, HibernateJpaAutoConfiguration)
   jpa:
     show-sql: true

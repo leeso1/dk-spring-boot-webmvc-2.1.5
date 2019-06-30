@@ -17,34 +17,34 @@ import me.learning.domain.service.ResourceNotFoundException;
 @Slf4j
 @RestControllerAdvice
 public class ErrorResponseControllerAdvice {
-  
-  @Autowired
-  MessageSource messageSource;
-  
-  @ExceptionHandler(Throwable.class)
-  public ResponseEntity<?> handleException(Throwable ex, HttpServletRequest req, HttpServletResponse res) {
-    // ErrorCode Mapping
-    EmployeeErrorCode code = exceptionMapping(ex);
-    
-    // ErrorResponse 정의
-    ErrorResponse error = ErrorResponse.builder()
-        .status(code.getStatus().value())
-        .code(code.getCode())
-        .message("from messageSources") // TODO message resolver 필요
-        .build();
-    
-    log.warn("error={}", error);
-    
-    return ResponseEntity
-        .status(code.getStatus())
-        .body(Maps.immutableEntry("error", error));
-  }
 
-  private EmployeeErrorCode exceptionMapping(Throwable ex) {
-    if (ex instanceof ResourceNotFoundException)
-      return EmployeeErrorCode.EMPLOYEE_NOT_FOUND;
-    
-    return EmployeeErrorCode.UKNOWN_SEVER_ERROR;
-  }
+    @Autowired
+    MessageSource messageSource;
+
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<?> handleException(Throwable ex, HttpServletRequest req, HttpServletResponse res) {
+        // ErrorCode Mapping
+        EmployeeErrorCode code = exceptionMapping(ex);
+
+        // ErrorResponse 정의
+        ErrorResponse error = ErrorResponse.builder()
+                .status(code.getStatus().value())
+                .code(code.getCode())
+                .message("from messageSources") // TODO message resolver 필요
+                .build();
+
+        log.warn("error={}", error);
+
+        return ResponseEntity
+                .status(code.getStatus())
+                .body(Maps.immutableEntry("error", error));
+    }
+
+    private EmployeeErrorCode exceptionMapping(Throwable ex) {
+        if (ex instanceof ResourceNotFoundException)
+            return EmployeeErrorCode.EMPLOYEE_NOT_FOUND;
+
+        return EmployeeErrorCode.UKNOWN_SEVER_ERROR;
+    }
 
 }

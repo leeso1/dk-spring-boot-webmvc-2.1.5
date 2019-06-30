@@ -1,42 +1,42 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.5.RELEASE'
-	id 'java'
-	id 'eclipse'
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+    id 'java'
+    id 'eclipse'
 }
 
 apply plugin: 'io.spring.dependency-management'
 
 bootJar {
-  baseName = 'learning-spring-webmvc'
-  version = '0.0.1'
-  launchScript()
+    baseName = 'learning-spring-webmvc'
+    version = '0.0.1'
+    launchScript()
 }
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenLocal()
-  maven { url "https://plugins.gradle.org/m2/" }
-  mavenCentral()
-  jcenter()
+    mavenLocal()
+    maven { url "https://plugins.gradle.org/m2/" }
+    mavenCentral()
+    jcenter()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.google.guava:guava:27.1-jre'
-	compileOnly 'org.projectlombok:lombok'
-	compileOnly 'org.hibernate:hibernate-jpamodelgen'
-	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
-	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor 'org.hibernate:hibernate-jpamodelgen'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.google.guava:guava:27.1-jre'
+    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.hibernate:hibernate-jpamodelgen'
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.hibernate:hibernate-jpamodelgen'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
