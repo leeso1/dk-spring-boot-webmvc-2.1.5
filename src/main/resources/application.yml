@@ -43,7 +43,7 @@ logging:
     org.springframework: info
     com.zaxxer: trace
 
-# Custom adapter
+# Integration Properties
 integration:
   enabled: true
   servers:
