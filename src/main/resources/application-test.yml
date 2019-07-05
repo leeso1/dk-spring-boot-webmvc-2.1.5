@@ -47,19 +47,21 @@ logging:
 integration:
   enabled: true
   servers:
-    - name: default-server1
+    - name: test-server1
       base-url: 10.0.0.1
-      description: DEFAULT SERVER1
-    - name: default-server2
+      description: TEST SERVER1
+    - name: test-server2
       base-url: 10.0.0.2
-      description: DEFAULT SERVER2
-
+      description: TEST SERVER2
   map:
     int1:
-      name: default-server3
+      name: test-server3
       base-url: 10.0.0.3
-      description: DEFAULT SERVER3
+      description: TEST SERVER3
     int2:
-      name: default-server4
+      name: test-server4
       base-url: 10.0.0.4
-      description: DEFAULT SERVER4
+      description: TEST SERVER4
+
+
+

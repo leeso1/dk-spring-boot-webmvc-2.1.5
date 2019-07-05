@@ -53,6 +53,12 @@ public class Employee extends BaseEntity implements Serializable {
     }
 
     /**
+     * Default Constructor
+     */
+    public Employee() {
+    }
+
+    /**
      * Parameter Constructor
      */
     public Employee(Long id, String name, String department) {
@@ -117,14 +123,13 @@ public class Employee extends BaseEntity implements Serializable {
     public void paySalary(int year, int month, BigDecimal salary, String currency) {
         LocalDateTime now = LocalDateTime.now().withNano(0);
         EmployeeSalary employSalary = EmployeeSalary.builder()
-                .withId(getId())
+                .withId(this.getId())
                 .withYear(now.getYear())
                 .withMonth(now.getMonthValue())
                 .withDay(now.getDayOfMonth())
-                .withSalary(salary)
                 .withCurrency(currency)
                 .build();
-        salaries.add(employSalary);
+        this.salaries.add(employSalary);
     }
 
     public static Builder builder() {

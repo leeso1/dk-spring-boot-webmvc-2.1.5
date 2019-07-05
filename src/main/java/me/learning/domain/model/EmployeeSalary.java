@@ -10,12 +10,10 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.annotation.Generated;
 
 @Entity
 @IdClass(EmployeeSalaryId.class)
 @Table(name = "EMPLOYEE_SALARY")
-@SuppressWarnings("serial")
 public class EmployeeSalary extends BaseEntity implements Serializable {
 
     /**
@@ -58,11 +56,10 @@ public class EmployeeSalary extends BaseEntity implements Serializable {
     @Column(name = "CURRENCY", length = 3)
     private String currency;
 
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "EMPLOYEE_ID", insertable = false, updatable = false)
     private Employee employee;
 
-    @Generated("SparkTools")
     private EmployeeSalary(Builder builder) {
         this.id = builder.id;
         this.year = builder.year;

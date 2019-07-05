@@ -24,10 +24,9 @@ public class EmployeeSalaryId implements Serializable {
 
     /**
      * Pay month
-     * ex) 01, 02...12
+     * ex) 1, 2...12
      */
     @Column(name = "MONTH", nullable = false)
-
     private int month;
 
     public Long getId() {

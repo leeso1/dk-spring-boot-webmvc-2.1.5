@@ -6,6 +6,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import me.learning.domain.model.Employee_;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,11 @@ public class EmployeeController {
             @RequestParam(name = "size", defaultValue = "10") @Min(1) @Max(100) int size,
             @RequestParam(name = "sort", required = false) String sort) {
         LOG.info("[IF-001.STAFF 조회] params -> page={}, size={}, sort={}", page, size, sort);
+
         Page<Employee> employees = employeeService.getAllEmployees(page, size, EmployeeSorts.of(sort));
+
         LOG.info("[IF-001.STAFF 조회] OK. Returned elements={}", employees.getNumberOfElements());
+
         return PageResult.<Staff>builder()
                 .total(employees.getTotalElements())
                 .items(
@@ -65,12 +69,12 @@ public class EmployeeController {
         /**
          * Employee.name ascending sort
          */
-        private static final Sort BY_NAME_ASC = Sort.by(Sort.Direction.ASC, "name");
+        private static final Sort BY_NAME_ASC = Sort.by(Sort.Direction.ASC, Employee_.NAME);
 
         /**
          * Employee.name descending sort
          */
-        private static final Sort BY_NAME_DSC = Sort.by(Sort.Direction.DESC, "name");
+        private static final Sort BY_NAME_DSC = Sort.by(Sort.Direction.DESC, Employee_.NAME);
 
         public static final Sort of(String sort) {
             if (NAME_ASC.equals(sort)) {
