@@ -41,7 +41,9 @@ logging:
     root: info
     me.learning: debug
     org.springframework: info
+    org.hibernate: error
     com.zaxxer: trace
+  path: /var/log
 
 # Integration Properties
 integration:

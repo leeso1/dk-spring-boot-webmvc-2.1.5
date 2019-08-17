@@ -16,7 +16,6 @@ import me.learning.domain.model.Employee;
 import me.learning.domain.model.EmployeeRepository;
 
 @Service
-@Transactional
 public class DefaultEmployeeService implements EmployeeService {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
@@ -32,6 +31,7 @@ public class DefaultEmployeeService implements EmployeeService {
         return result;
     }
 
+    @Transactional
     public void createEmployee(String name, String dept) {
         Assert.notNull(name, "name must be not null");
 

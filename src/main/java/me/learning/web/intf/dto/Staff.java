@@ -2,6 +2,7 @@ package me.learning.web.intf.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Builder;
 import lombok.Data;
 import me.learning.domain.model.Employee;

@@ -42,6 +42,7 @@ logging:
     me.learning: debug
     org.springframework: info
     com.zaxxer: trace
+  path: /var/log
 
 # Integration Properties
 integration:
@@ -54,5 +55,11 @@ integration:
       base-url: 10.0.0.2
       description: DEV SERVER2
 
-
-
+# Error
+server:
+  error:
+    include-exception: true
+    include-stacktrace: always
+    whitelabel:
+      enabled: true
+    # path: /error
