@@ -1,0 +1,104 @@
+/*
+ * Copyright (c) 2020 DREAMUS COMPANY.
+ * All right reserved.
+ * This software is the confidential and proprietary information of DREAMUS COMPANY.
+ * You shall not disclose such Confidential Information and
+ * shall use it only in accordance with the terms of the license agreement
+ * you entered into with DREAMUS COMPANY.
+ */
+
+package me.learning;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+/**
+ * 설명 :
+ *
+ * @author Daniel/DREAMUS COMPANY (daekwon.song@sk.com)
+ * @date 2020. 02. 27.
+ */
+public class CollectionTest {
+
+    public static void main(String[] args) {
+
+        /**
+         * Test Collection partition
+         */
+        List<Integer> list = Arrays.asList(1, 3, 4, 5, 6, 7, 8, 9, 0);
+
+        /**
+         * subList test
+         */
+        System.out.println("=====================================" + "서브 리스트 출력");
+        list = list.subList(0, Math.min(20, list.size()));
+        list.forEach(System.out::println);
+
+        System.out.println("=====================================" + "파티션 목록 출력");
+
+        Collections.sort(list, Comparator.comparingInt(Integer::intValue).reversed());
+
+        List<List<Integer>> partitions = Lists.partition(list, 7);
+        System.out.println("Partition Size = " + partitions.size());
+
+        partitions.stream().forEach(System.out::println);
+
+        /**
+         * Test TreeMap
+         */
+        Map<Integer, String> map = Maps.newHashMap();
+        map.put(1, "송대권");
+        map.put(2, "이미경");
+        map.put(4, "송준석");
+        map.put(3, "Frost");
+        map.put(8, "Daniel");
+        map.put(7, "Chris");
+
+        System.out.println("=====================================" + "Key 출력");
+        map.keySet().stream().forEach(System.out::println);
+
+        System.out.println("=====================================" + "Value 출력");
+        // 정렬전
+        map.values().stream().forEach(System.out::println);
+
+        TreeMap<Integer, String> treeMap = new TreeMap<>(map);
+        treeMap.entrySet().stream().sorted(Map.Entry.comparingByKey());
+
+        System.out.println("=====================================");
+        treeMap.values().stream().forEach(System.out::println);
+
+        /**
+         * Test Optional
+         */
+        list = Optional.ofNullable(list)
+                .map(List::stream)
+                .orElseGet(Stream::empty)
+                .collect(Collectors.toList());
+
+        System.out.println("=====================================");
+
+        Map<Long, String> nullableMap = Maps.newHashMap();
+        nullableMap.put(1L, null);
+
+        nullableMap.forEach((K,V) -> System.out.println("==> Key = " + K + ", Value = " + V));
+
+        /**
+         * 중복 제거 테스트
+         */
+        System.out.println("=====================================");
+
+        list.add(2);
+        list.add(3);
+
+        list.forEach(System.out::println);
+
+        System.out.println(":: 중복 제거 후 ::");
+
+        list = list.stream().distinct().collect(Collectors.toList());
+        list.forEach(System.out::println);
+    }
+}

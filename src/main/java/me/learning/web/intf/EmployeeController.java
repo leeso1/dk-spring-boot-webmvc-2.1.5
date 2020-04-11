@@ -6,6 +6,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import me.learning.bootstrap.XssProperties;
 import me.learning.domain.model.Employee_;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,9 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    XssProperties xssProperties;
+
     /**
      * Page를 이용한 Staff 조회
      *
@@ -48,6 +52,8 @@ public class EmployeeController {
             @RequestParam(name = "size", defaultValue = "10") @Min(1) @Max(100) int size,
             @RequestParam(name = "sort", required = false) String sort) {
         LOG.info("[IF-001.STAFF 조회] params -> page={}, size={}, sort={}", page, size, sort);
+
+        LOG.info("xss uris={}", xssProperties.getUris());
 
         Page<Employee> employees = employeeService.getAllEmployees(page, size, EmployeeSorts.of(sort));
 

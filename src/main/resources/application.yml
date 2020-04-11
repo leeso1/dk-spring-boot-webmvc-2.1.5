@@ -65,3 +65,9 @@ integration:
       name: default-server4
       base-url: 10.0.0.4
       description: DEFAULT SERVER4
+
+# XSS Filter
+xss:
+  uris:
+    - personal/v1/listen/track
+    - personal/v1/listen/channel
