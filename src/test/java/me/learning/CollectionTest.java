@@ -11,6 +11,7 @@ package me.learning;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import me.learning.bootstrap.IntegrationProperties;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -100,5 +101,45 @@ public class CollectionTest {
 
         list = list.stream().distinct().collect(Collectors.toList());
         list.forEach(System.out::println);
+
+        System.out.println("============ 중복 제거 테스트 ===========");
+
+        ArrayList<Integer> totalList = new ArrayList<>();
+        totalList.add(1);
+        totalList.add(2);
+        totalList.add(3);
+        totalList.add(4);
+        totalList.add(5);
+
+        ArrayList<Integer> subList = new ArrayList<>();
+        subList.add(1);
+        subList.add(4);
+
+
+        totalList.removeAll(subList);
+
+        List<Integer> fullList = new ArrayList<>();
+        fullList.addAll(subList);
+        fullList.addAll(totalList);
+
+        fullList.forEach(System.out::println);
+
+
+        System.out.println("============= subList 테스트 ============");
+
+        /**
+         * subList 테스트
+         */
+        List<Integer> all = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        List<Integer> order = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+
+        try {
+            List<Integer> remain = all.subList(Math.min(order.size(), all.size()), all.size());
+            remain.forEach(System.out::println);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
