@@ -9,22 +9,22 @@
 
 package me.learning;
 
-import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  * 설명 :
  *
  * @author Daniel/DREAMUS COMPANY (daekwon.song@sk.com)
- * @date 2020. 04. 18.
+ * @date 2020. 05. 29.
  */
-public class NumberTest {
+public class LocalTimeTest {
 
     public static void main(String[] args) {
 
-        int divisor = 1083 / 250;
-        double doubleDivisor = 1083D / 250D;
-        double carryDivisor = Math.ceil(1083/250D);
+        long sec = LocalTime.of(23,59,59).until(LocalTime.MAX, ChronoUnit.SECONDS);
+        System.out.println("====> " + sec);
+
 
     }
 }

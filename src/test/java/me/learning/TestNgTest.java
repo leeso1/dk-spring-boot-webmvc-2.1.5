@@ -9,22 +9,13 @@
 
 package me.learning;
 
-import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 /**
  * 설명 :
  *
  * @author Daniel/DREAMUS COMPANY (daekwon.song@sk.com)
- * @date 2020. 04. 18.
+ * @date 2020. 06. 05.
  */
-public class NumberTest {
-
-    public static void main(String[] args) {
-
-        int divisor = 1083 / 250;
-        double doubleDivisor = 1083D / 250D;
-        double carryDivisor = Math.ceil(1083/250D);
-
-    }
+public class TestNgTest {
 }

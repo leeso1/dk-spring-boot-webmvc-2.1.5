@@ -22,9 +22,8 @@ configurations {
 }
 
 repositories {
-    mavenLocal()
-    maven { url "https://plugins.gradle.org/m2/" }
     mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
     jcenter()
 }
 
@@ -40,4 +39,5 @@ dependencies {
     annotationProcessor 'org.hibernate:hibernate-jpamodelgen'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.testng:testng:7.1.0'
 }

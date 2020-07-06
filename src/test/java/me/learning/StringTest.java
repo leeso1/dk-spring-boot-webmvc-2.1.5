@@ -39,5 +39,13 @@ public class StringTest {
         Collections.sort(unsorted);
         unsorted.stream().forEach(System.out::println);
 
+        System.out.println("===================== startWith 테스트 ====================");
+        String s1 = "20000000";
+        String s2 = "20400000";
+
+
+        boolean result = s1.startsWith("200") || s2.startsWith("200");
+        System.out.println("---> result = " + result);
+
     }
 }

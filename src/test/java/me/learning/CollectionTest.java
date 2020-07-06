@@ -11,6 +11,9 @@ package me.learning;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.learning.bootstrap.IntegrationProperties;
 
 import java.util.*;
@@ -141,5 +144,35 @@ public class CollectionTest {
             e.printStackTrace();
         }
 
+        System.out.println("============= Order 테스트 ============");
+
+        Person person1 = new Person(1);
+        Person person2 = new Person(2);
+        Person person3 = new Person(3);
+        Person person4 = new Person(4);
+        Person person5 = new Person(5);
+
+        List<Person> orderList = Arrays.asList(person1, person2, person3, person4, person5);
+        orderList.forEach(System.out::println);
+
+        orderList.sort(Comparator.comparingInt(Person::getAge).reversed());
+        orderList.forEach(System.out::println);
+
+    }
+
+    public static class Person {
+        int age;
+
+        public Person(int age) {
+            this.age = age;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
     }
 }
